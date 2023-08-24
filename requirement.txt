@@ -1,1 +1,2 @@
-https://hubblo-org.github.io/scaphandre-documentation/tutorials/installation-linux.html
+tensorflow
+matplotlib
