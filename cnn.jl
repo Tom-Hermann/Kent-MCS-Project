@@ -1,5 +1,5 @@
 # With Julia 1.7+, this will prompt if neccessary to install everything, including CUDA:
-using Flux, Statistics, ProgressMeter
+using Flux, Statistics, ProgressMeter, CUDA
 
 # Generate some data for the XOR problem: vectors of length 2, as columns of a matrix:
 noisy = rand(Float32, 2, 1000)                                    # 2×1000 Matrix{Float32}
