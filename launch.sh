@@ -87,6 +87,31 @@ fi
 
 # Function to display script usage
 function display_usage {
-    echo "Usage: $0 [-l|--language python|julia] [-t|--type gpu|cpu] [-i|--install] [-s|--student] [-b|--benchmark] [-h|--help]"
+    echo "Usage: $0 [-l|--language python|julia] [-t|--type gpu|cpu] [-i|install] [-s|--student] [-b|--benchmark] [-h|--help]"
+    echo ""
+    echo "Description:"
+    echo "This script is designed to run either Python or Julia scripts for CPU or GPU, with optional benchmarking and student GPU partition."
+    echo "It provides flexibility in choosing the language, execution type, and other options."
+    echo ""
+    echo "Options:"
+    echo "-l, --language    Choose the scripting language (python or julia)."
+    echo "-t, --type        Specify the execution type (gpu or cpu)."
+    echo "-i, --install     Install the required packages before script execution (optional)."
+    echo "-s, --student     Use the student GPU partition (optional)."
+    echo "-b, --benchmark   Run benchmark after script execution (optional)."
+    echo "-h, --help        Display this usage message and exit."
+    echo ""
+    echo "Examples:"
+    echo "1. Run Python script on GPU partition:"
+    echo "   $0 -l python -t gpu"
+    echo ""
+    echo "2. Run Julia script on CPU:"
+    echo "   $0 -l julia -t cpu"
+    echo ""
+    echo "3. Run Python script on student GPU partition with benchmark:"
+    echo "   $0 -l python -t gpu -s -b"
+    echo ""
+    echo "4. Display script usage information:"
+    echo "   $0 -h"
     exit 1
 }
