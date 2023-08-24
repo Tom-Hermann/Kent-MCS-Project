@@ -5,12 +5,8 @@ language=""
 type=""
 student=""
 benchmark=""
+install=""
 
-# Function to display script usage
-function display_usage {
-    echo "Usage: $0 [-l|--language python|julia] [-t|--type gpu|cpu] [-s|--student] [-b|--benchmark] [-h|--help]"
-    exit 1
-}
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -33,6 +29,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         -h|--help)
             display_usage
+            ;;
+        -i|--install)
+            install="true"
+            shift
             ;;
         *)
             echo "Invalid argument: $1"
@@ -63,12 +63,18 @@ fi
 
 # Run the selected script
 if [[ "$language" == "julia" ]]; then
+    if [[ "$install" == "true" ]]; then
+        julia ./src/julia-flux/requirement.jl
+    fi
     if [[ "$type" == "gpu" ]]; then
         srun -p "$gpu_partition" --gres gpu:1 julia ./src/julia-flux/gpu.jl
     else
         julia ./src/julia-flux/cpu.jl
     fi
 elif [[ "$language" == "python" ]]; then
+    if [[ "$install" == "true" ]]; then
+        pip install -r ./src/python-tensorflow/requirement.txt
+    fi
     if [[ "$type" == "gpu" ]]; then
         srun -p "$gpu_partition" --gres gpu:1 python ./src/python-tensorflow/gpu.py
     else
@@ -79,3 +85,8 @@ else
     display_usage
 fi
 
+# Function to display script usage
+function display_usage {
+    echo "Usage: $0 [-l|--language python|julia] [-t|--type gpu|cpu] [-i|--install] [-s|--student] [-b|--benchmark] [-h|--help]"
+    exit 1
+}
